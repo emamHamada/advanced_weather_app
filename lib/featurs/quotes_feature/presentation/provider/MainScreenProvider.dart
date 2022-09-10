@@ -4,13 +4,13 @@ import 'package:flutter/cupertino.dart';
 import '../../data/datasources/remote/api.dart';
 import '../../data/models/weather_model.dart';
 
-class MainScreenModel extends ChangeNotifier {
+class MainScreenProvider extends ChangeNotifier {
   WeatherForecastModel? _forecastObject;
   WeatherForecastModel? get forecastObject => _forecastObject;
   bool _loading = true;
 
 List favorite_places=[];
-  List searchList=[];
+  // List searchList=[];
   bool get loading => _loading;
   String cityName = '';
 
@@ -34,7 +34,7 @@ List favorite_places=[];
   void onSubmitSearch() async {
     if (cityName.isEmpty) return;
     updateState();
-    searchList.add(cityName);
+    favorite_places.add(cityName);
     _forecastObject =
         await WeatherApi().fetchWeatherForecast(cityName: cityName);
     cityName = '';
